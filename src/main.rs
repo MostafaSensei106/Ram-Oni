@@ -1,5 +1,5 @@
 #[cfg(windows)]
-mod simple_windows_ram_bomb {
+mod ram_oni {
     use std::ffi::CString;
     use std::process::Command;
     use std::thread;
@@ -45,7 +45,7 @@ mod simple_windows_ram_bomb {
 
 #[cfg(windows)]
 fn main() {
-    simple_windows_ram_bomb::start();
+    ram_oni::start();
 }
 
 #[cfg(not(windows))]

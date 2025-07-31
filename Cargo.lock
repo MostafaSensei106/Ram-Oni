@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "Simple-Windows-Ram-Bomb"
+name = "Ram-Oni"
 version = "0.1.0"
 dependencies = [
  "winapi",
