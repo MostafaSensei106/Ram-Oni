@@ -4,8 +4,7 @@
 </p>
 
 <p align="center">
-  <strong>A high-performance, feature-rich image conversion CLI tool built in Go.</strong><br>
-  Fast. Smart. Efficient. All from the terminal.
+ **RAM Oni - ラム鬼** is a Windows-only educational stress-testing tool written in Rust, designed to simulate extreme RAM and process load for learning and experimentation
 </p>
 
 <p align="center">
