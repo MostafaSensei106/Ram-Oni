@@ -4,8 +4,7 @@ mod ram_oni {
     use std::process::Command;
     use std::thread;
     use std::time::Duration;
-    use winapi::um::sysinfoapi::GlobalMemoryStatusEx;
-    use winapi::um::sysinfoapi::MEMORYSTATUSEX;
+    use winapi::um::sysinfoapi::{GlobalMemoryStatusEx, MEMORYSTATUSEX};
     use winapi::um::winuser::{MB_OK, MessageBoxA};
 
     fn get_memory_status() -> Option<u64> {
@@ -29,7 +28,7 @@ mod ram_oni {
     pub fn start() {
         unsafe {
             let title = CString::new("RAM Oni").unwrap();
-            let message = CString::new("Hello,there this is RAM Oni and this is an educational tool to study system behavior under stress").unwrap();
+            let message = CString::new("Hello, this is RAM Oni — an educational tool to study system behavior under stress").unwrap();
             MessageBoxA(
                 std::ptr::null_mut(),
                 message.as_ptr(),
@@ -41,8 +40,13 @@ mod ram_oni {
         thread::spawn(|| {
             let mut hog: Vec<Vec<u8>> = Vec::new();
             loop {
-                hog.push(vec![0u8; 500 * 1024 * 1024]);
-                println!("🔥 RAM CHUNK Allocated: {} MB", hog.len() * 500);
+                for _ in 0..10 {
+                    let mut chunk = vec![0u8; 50 * 1024 * 1024]; // 50MB
+                    chunk.shrink_to_fit();
+                    hog.push(chunk);
+                    println!("🔥 RAM CHUNK Allocated: {} MB", hog.len() * 50);
+                    thread::sleep(Duration::from_millis(5));
+                }
 
                 if let Some(free_mem) = get_memory_status() {
                     println!("🧠 Free RAM: {:.2} MB", free_mem as f64 / (1024.0 * 1024.0));
@@ -52,8 +56,6 @@ mod ram_oni {
                         break;
                     }
                 }
-
-                thread::sleep(Duration::from_millis(10));
             }
         });
 
